@@ -1,5 +1,5 @@
 
-const Questions = require('./schemas/question.schema');// It is module
+const QuestionsModel = require('../schemas/question.schema');// It is module
 
 class Question {
 
@@ -9,7 +9,7 @@ class Question {
             question["createdAt"] = new Date();
             question["updatedAt"] = new Date();
 
-            let newQuestion = new Questions(question);
+            let newQuestion = new QuestionsModel(question);
 
             newQuestion.save().then((doc) => {
                 resolve(doc);
@@ -29,7 +29,7 @@ class Question {
 
         return new Promise((resolve, reject) => {
             console.log('dddd');
-            Questions.find({}).then((data) => {
+            QuestionsModel.find({}).then((data) => {
 
                 resolve(data);
             }).catch((err) => {

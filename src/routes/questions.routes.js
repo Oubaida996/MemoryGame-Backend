@@ -1,6 +1,6 @@
 'use strict';
 
-const Question = require('./Database/Question'); //it is class
+const Question = require('../Database/Classes/Question'); //it is class
 const newQuestion = new Question();
 
 const express = require('express');
