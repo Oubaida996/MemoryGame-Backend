@@ -18,6 +18,21 @@ class Image {
     //===================End addImages methode
 
 
+    //===================Start getImages methode
+
+    getImages(questionId) {
+        return new Promise((resolve, reject) => {
+            ImageModel.find({ question_id: questionId }).then((data) => {
+                resolve(data);
+            }).catch((err) => {
+                reject(err);
+            });
+        });
+    }
+
+    //===================End getImages methode
+
+
 }
 
 
