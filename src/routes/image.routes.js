@@ -40,29 +40,36 @@ const upload = multer({
 //============= Config Multer
 
 
-//==============upload images
+//==============Start upload images
 // upload.single >>>>>>> req.file  
 // upload.array("image" , 3 //maxCount) >>>>>>> req.files
-router.post('/uploadImages', upload.array("image"), (req, res) => {
+router.post('/uploadImages/:questionId', upload.array("image"), (req, res) => {
     console.log('req.files', req.files);
-    // console.log(fs.readFileSync(req.files[0].path));
-    // var img = fs.readFileSync(req.files[0].path).toString('base64');
-    // var encode_img = img.toString('base64');
-    // var image = new Buffer.from(encode_img, 'base64');
-    // console.log(image);
-    // console.log(encode_img);
-    // console.log({ img });
+    // var buff = fs.readFileSync(req.files[0].path)
+    // console.log({ buff });
+    // var base64Data = buff.toString('base64');
+    // console.log({ base64Data });
+    // var bufff = new Buffer.from(base64Data, 'base64')
+    // console.log({ bufff });
+    // console.log(req.files[0].path);
+
+
+
     let images = req.files.map((image) => {
         return {
             image_name: image.filename,
             img: {
                 contentType: image.mimetype,
                 data: new Buffer.from(fs.readFileSync(image.path).toString('base64'), 'base64')
-            }
+            },
+            question_id: req.params.questionId
         }
     });
-    newImage.addImages(images).then((data) => {
-        res.status(201).json(data);
+    newImage.addImages(images).then((doc) => {
+
+
+
+        res.status(201).json(doc);
     }).catch((err) => {
         res.status(500).json(err);
     });
@@ -70,7 +77,20 @@ router.post('/uploadImages', upload.array("image"), (req, res) => {
 });
 
 
-//==============upload images
+//==============End upload images
 
 
+
+//===============Start getImages
+router.get('/getImages/:questionId', (req, res) => {
+    newImage.getImages(req.params.questionId).then((data) => {
+        // let path = `data:${data[0].img.contentType};base64, ${Buffer.from(data[0].img.data).toString('base64')}`;
+        // console.log({ path });
+        res.status(200).json(data);
+    }).catch((err) => {
+        res.status(500).json(err);
+    });
+});
+
+//===============End getImages
 module.exports = router;
