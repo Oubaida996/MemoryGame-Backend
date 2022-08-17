@@ -5,10 +5,12 @@ const newQuestion = new Question();
 
 const express = require('express');
 const router = express.Router();
+const aclAuth = require('../auth/middleware/acl.auth');
+const bearerAuth = require('../auth/middleware/bearer.auth');
 
 
 //Routes
-router.post('/questions', createQuestion);
+router.post('/questions', bearerAuth, aclAuth, createQuestion);
 router.get('/questions', getQuestions);
 
 

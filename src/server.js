@@ -13,6 +13,7 @@ const db = new Database;
 
 const routerQuestion = require('./routes/questions.routes');
 const routerImage = require('./routes/image.routes');
+const routerRigistration = require('./routes/registration.routes');
 
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(routerQuestion);
 app.use(routerImage);
+app.use(routerRigistration);
 
 app.get('/', (req, res) => res.json(`Home Page`));
 
