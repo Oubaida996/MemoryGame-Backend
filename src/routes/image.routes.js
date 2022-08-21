@@ -44,7 +44,11 @@ const upload = multer({
 // upload.single >>>>>>> req.file  
 // upload.array("image" , 3 //maxCount) >>>>>>> req.files
 router.post('/uploadImages/:questionId', upload.array("image"), (req, res) => {
+    console.log(2111);
+
     console.log('req.files', req.files);
+    console.log(2221);
+
     // var buff = fs.readFileSync(req.files[0].path)
     // console.log({ buff });
     // var base64Data = buff.toString('base64');
@@ -65,9 +69,11 @@ router.post('/uploadImages/:questionId', upload.array("image"), (req, res) => {
             question_id: req.params.questionId
         }
     });
+    console.log(images, 222222233);
+
     newImage.addImages(images).then((doc) => {
 
-
+        console.log(doc, 444111144);
 
         res.status(201).json(doc);
     }).catch((err) => {
