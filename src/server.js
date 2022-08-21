@@ -26,7 +26,7 @@ app.use(routerQuestion);
 app.use(routerImage);
 app.use(routerRigistration);
 
-app.get('/', (req, res) => res.json(`Home Page`));
+app.get('/', (req, res) => res.send('Home Page '));
 
 function start(port) {
     app.listen(port, () => {
