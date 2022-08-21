@@ -51,8 +51,9 @@ async function signup(req, res) {
 
 
 function signin(req, res) {
+    // console.log(req.user.token);
 
-    res.status(200).json(req.user.token);
+    res.status(200).json({ info: req.user, token: req.user.token });
 }
 
 module.exports = router;

@@ -43,7 +43,7 @@ class Users {
                     // console.log({ valid });
                     // generate a new token
                     let newToken = jwt.sign({ userEmail: user.user_email }, SECRET);
-                    console.log({ newToken });
+                    // console.log({ newToken });
                     user.token = newToken;
                     // console.log(user.token);
                     resolve(user);
